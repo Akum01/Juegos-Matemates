@@ -3,7 +3,6 @@ window.onload = function () {
   const ctx = canvas.getContext("2d");
   const box = 20;
   let score = 0;
-  let direction = "RIGHT";
   let gameOver = false;
   const maxScore = 6;
 
@@ -23,13 +22,6 @@ window.onload = function () {
 
   for (let i = 0; i < 3; i++) generateOperation();
 
-  document.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-    else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-    else if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-    else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-  });
-
   function mostrarFin(mensaje) {
     gameOver = true;
     ctx.fillStyle = "rgba(0,0,0,0.7)";
@@ -39,22 +31,6 @@ window.onload = function () {
     ctx.textAlign = "center";
     ctx.fillText(mensaje, canvas.width / 2, canvas.height / 2 - 20);
     ctx.fillText("Puntaje: " + score, canvas.width / 2, canvas.height / 2 + 10);
-
-    const btnReiniciar = document.createElement("button");
-    btnReiniciar.textContent = "🔁 Reiniciar";
-    btnReiniciar.style.margin = "10px";
-    btnReiniciar.onclick = () => location.reload();
-
-    const btnInicio = document.createElement("button");
-    btnInicio.textContent = "🏠 Volver al inicio";
-    btnInicio.style.margin = "10px";
-    btnInicio.onclick = () => (window.location.href = "index.html");
-
-    const contenedor = document.createElement("div");
-    contenedor.style.textAlign = "center";
-    contenedor.appendChild(btnReiniciar);
-    contenedor.appendChild(btnInicio);
-    document.body.appendChild(contenedor);
   }
 
   function draw() {
@@ -123,6 +99,7 @@ window.onload = function () {
 
   setInterval(draw, 200);
 };
+
 
 
 

@@ -37,6 +37,9 @@
       background-color: #4CAF50;
       color: white;
       cursor: pointer;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
     }
     .controls button:hover {
       background-color: #388E3C;
@@ -59,10 +62,10 @@
   <div id="score">Puntaje: 0</div>
 
   <div class="controls">
-    <button onclick="setDirection('UP')">⬆️</button>
-    <button onclick="setDirection('LEFT')">⬅️</button>
-    <button onclick="setDirection('DOWN')">⬇️</button>
-    <button onclick="setDirection('RIGHT')">➡️</button>
+    <button onclick="setDirection('UP')" ontouchstart="setDirection('UP')">⬆️</button>
+    <button onclick="setDirection('LEFT')" ontouchstart="setDirection('LEFT')">⬅️</button>
+    <button onclick="setDirection('DOWN')" ontouchstart="setDirection('DOWN')">⬇️</button>
+    <button onclick="setDirection('RIGHT')" ontouchstart="setDirection('RIGHT')">➡️</button>
   </div>
 
   <button id="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
@@ -91,6 +94,7 @@
   <script src="serpiente.js" defer></script>
 </body>
 </html>
+
 
 
 

@@ -65,6 +65,9 @@
       align-items: center;
       justify-content: center;
       touch-action: manipulation;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
     }
     .piece {
       border: 2px solid #4CAF50;
@@ -184,7 +187,8 @@
         piece.textContent = valor;
         piece.draggable = true;
         piece.ondragstart = e => {
-          e.dataTransfer.setData("text", e.target.textContent);
+          e.preventDefault();
+          e.dataTransfer.setData("text/plain", e.target.textContent);
         };
         piecesContainer.appendChild(piece);
       });
@@ -213,6 +217,7 @@
   </script>
 </body>
 </html>
+
 
 
 
