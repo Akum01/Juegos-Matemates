@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Math Birds</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #e0f7fa;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    canvas {
+      background-color: #fff;
+      display: block;
+      margin: 20px auto;
+      border: 2px solid #4CAF50;
+    }
+    #info {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    #volver {
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #volver:hover {
+      background-color: #007bb5;
+    }
+  </style>
+</head>
+<body>
+  <h2>Math Birds</h2>
+  <canvas id="gameCanvas" width="600" height="400"></canvas>
+  <div id="info">Puntaje: 0 | Vidas: ❤️❤️❤️</div>
+  <button id="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+  <script src="mathbirds.js" defer></script>
+</body>
+</html>

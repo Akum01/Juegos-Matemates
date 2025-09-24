@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Serpiente Matemática</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    canvas {
+      background-color: #fff;
+      display: block;
+      margin: 20px auto;
+      border: 2px solid #4CAF50;
+    }
+    #score {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    #volver {
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #volver:hover {
+      background-color: #007bb5;
+    }
+  </style>
+</head>
+<body>
+  <h2>Serpiente Matemática</h2>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <div id="score">Puntaje: 0</div>
+  <button id="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+  <script src="serpiente.js" defer></script>
+</body>
+</html>
+
+

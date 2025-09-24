@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matemática Divertida</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fce4ec);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .games {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px;
+    }
+    .game-card {
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 280px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+    .game-icon {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .game-card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .game-card button {
+      background: #ffca28;
+      color: #333;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .game-card button:hover {
+      background-color: #fdd835;
+    }
+  </style>
+</head>
+<body>
+  <header>🌟 Matemática Divertida 🌟</header>
+
+  <section class="games">
+    <!-- Quiz clásico -->
+    <div class="game-card">
+      <div class="game-icon">🧠</div>
+      <h3>Juego de Quiz</h3>
+      <button onclick="window.open('quiz.html')">🎮 Jugar</button>
+    </div>
+
+    <!-- Adivinanzas -->
+    <div class="game-card">
+      <div class="game-icon">🕵️‍♂️</div>
+      <h3>Juego de Adivinanzas</h3>
+      <button onclick="window.open('juego_adivinanzas.html')">🎮 Jugar</button>
+    </div>
+
+    <!-- Verdadero o Falso -->
+    <div class="game-card">
+      <div class="game-icon">✅❌</div>
+      <h3>Verdadero o Falso</h3>
+      <button onclick="window.open('quiz_verdadero_falso.html')">🎮 Jugar</button>
+    </div>
+
+    <!-- Rompecabezas -->
+    <div class="game-card">
+      <div class="game-icon">🧩</div>
+      <h3>Rompecabezas Matemáticos</h3>
+      <button onclick="window.open('rompecabezas.html')">🎮 Jugar</button>
+    </div>
+
+    <!-- Math Birds -->
+    <div class="game-card">
+      <div class="game-icon">🐦🎯</div>
+      <h3>Math Birds</h3>
+      <button onclick="window.open('mathbirds.html')">🎮 Jugar</button>
+    </div>
+
+    <!-- Serpiente Matemática -->
+    <div class="game-card">
+      <div class="game-icon">🐍➕</div>
+      <h3>Serpiente Matemática</h3>
+      <button onclick="window.open('serpiente.html')">🎮 Jugar</button>
+    </div>
+  </section>
+</body>
+</html>

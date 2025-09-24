@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Preguntas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    #quiz-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+    }
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .answers {
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+    button.correct {
+      background-color: #4CAF50;
+    }
+    button.incorrect {
+      background-color: #f44336;
+    }
+    button.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      text-align: center;
+    }
+    #restart, #volver {
+      display: none;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #008CBA;
+      color: white;
+    }
+    #restart:hover, #volver:hover {
+      background-color: #007bb5;
+    }
+    #volver::before {
+      content: "🏠 ";
+    }
+    #progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      height: 20px;
+    }
+    #progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+<div id="quiz-container">
+  <h2>¿Listo para el quiz?</h2>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+  <div class="question" id="question"></div>
+  <div class="answers" id="answers"></div>
+  <div id="result"></div>
+  <button id="restart">Reiniciar Juego</button>
+  <button id="volver" onclick="playClick(); window.location.href='index.html'">Volver al inicio</button>
+</div>
+
+<!-- Sonidos -->
+<audio id="clickSound" src="matev/click.mp3" preload="auto"></audio>
+<audio id="correctSound" src="matev/correcto.mp3" preload="auto"></audio>
+<audio id="wrongSound" src="matev/error.mp3" preload="auto"></audio>
+
+<script>
+  function playClick() {
+    const audio = document.getElementById('clickSound');
+    if (audio) audio.play();
+  }
+  function playCorrectSound() {
+    const audio = document.getElementById('correctSound');
+    if (audio) audio.play();
+  }
+  function playWrongSound() {
+    const audio = document.getElementById('wrongSound');
+    if (audio) audio.play();
+  }
+</script>
+
+<script src="quiz.js" defer></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

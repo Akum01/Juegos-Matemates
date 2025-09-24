@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rompecabezas Matemáticos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    #puzzle-container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .equation {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .slots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .slot {
+      width: 60px;
+      height: 40px;
+      border: 2px dashed #aaa;
+      text-align: center;
+      line-height: 40px;
+      font-size: 1.2em;
+      background-color: #f9f9f9;
+    }
+    .pieces {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .piece {
+      width: 60px;
+      height: 40px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      line-height: 40px;
+      font-size: 1.2em;
+      border-radius: 4px;
+      cursor: grab;
+    }
+    #result {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    #volver {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #008CBA;
+      color: white;
+    }
+    #volver:hover {
+      background-color: #007bb5;
+    }
+    #level-selector {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #level-selector button {
+      margin: 5px;
+      padding: 8px 16px;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+    #level-selector button:hover {
+      background-color: #e68900;
+    }
+  </style>
+</head>
+<body>
+
+<div id="puzzle-container">
+  <h2>Rompecabezas Matemáticos</h2>
+  <div id="level-selector">
+    <button onclick="cargarNivel(1)">Nivel 1</button>
+    <button onclick="cargarNivel(2)">Nivel 2</button>
+    <button onclick="cargarNivel(3)">Nivel 3</button>
+    <button onclick="cargarNivel(4)">Nivel 4</button>
+  </div>
+  <div class="equation" id="equation-text">Selecciona un nivel para comenzar</div>
+  <div class="slots" id="slots"></div>
+  <div class="pieces" id="pieces"></div>
+  <div id="result"></div>
+  <button id="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+</div>
+
+<script src="rompecabezas.js" defer></script>
+
+</body>
+</html>
+
+
+
+
+
+
