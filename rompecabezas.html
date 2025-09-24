@@ -32,20 +32,13 @@
       border-radius: 8px;
       cursor: pointer;
     }
-    .niveles button:hover {
-      background-color: #fb8c00;
-    }
-    #instruccion {
+    #instruccion, #objetivo {
       font-size: 1.1em;
-      color: #880e4f;
       margin-bottom: 10px;
       font-weight: bold;
     }
-    #objetivo {
-      font-size: 1.1em;
-      color: #4CAF50;
-      margin-bottom: 15px;
-    }
+    #instruccion { color: #880e4f; }
+    #objetivo { color: #4CAF50; }
     .board {
       display: flex;
       flex-wrap: wrap;
@@ -58,21 +51,25 @@
       width: 60px;
       height: 40px;
       font-size: 1.2em;
-      border: 2px dashed #880e4f;
       border-radius: 5px;
-      background-color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      touch-action: manipulation;
       user-select: none;
-      -webkit-user-drag: none;
-      -webkit-touch-callout: none;
+      touch-action: manipulation;
+    }
+    .slot {
+      border: 2px dashed #880e4f;
+      background-color: #fff;
+      cursor: pointer;
     }
     .piece {
       border: 2px solid #4CAF50;
       background-color: #c8e6c9;
-      cursor: grab;
+      cursor: pointer;
+    }
+    .selected {
+      outline: 3px solid #ff5722;
     }
     #result {
       font-size: 1.2em;
@@ -93,9 +90,6 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-    }
-    .botones button:hover {
-      background-color: #007bb5;
     }
   </style>
 </head>
@@ -121,10 +115,12 @@
   </div>
 
   <script>
+    let piezaSeleccionada = null;
+
     function mostrarInstruccion(nivel) {
       const texto = document.getElementById("instruccion");
       if (nivel === 1) {
-        texto.textContent = "🧩 Arrastra los elementos para formar una suma básica.";
+        texto.textContent = "🧩 Toca una pieza y luego una casilla para formar una suma básica.";
       } else if (nivel === 2) {
         texto.textContent = "🧩 Completa: ___ + ___ + ___ + ___ = ?";
       } else if (nivel === 3) {
@@ -139,6 +135,7 @@
       const piecesContainer = document.getElementById("pieces");
       const resultDiv = document.getElementById("result");
 
+      piezaSeleccionada = null;
       slotsContainer.innerHTML = "";
       piecesContainer.innerHTML = "";
       resultDiv.textContent = "";
@@ -170,11 +167,11 @@
       expresion.forEach(() => {
         const slot = document.createElement("div");
         slot.className = "slot";
-        slot.ondragover = e => e.preventDefault();
-        slot.ondrop = e => {
-          const data = e.dataTransfer.getData("text");
-          if (slot.textContent === "") {
-            slot.textContent = data;
+        slot.onclick = () => {
+          if (piezaSeleccionada && slot.textContent === "") {
+            slot.textContent = piezaSeleccionada.textContent;
+            piezaSeleccionada.remove();
+            piezaSeleccionada = null;
             verificar(expresion, objetivo);
           }
         };
@@ -185,10 +182,10 @@
         const piece = document.createElement("div");
         piece.className = "piece";
         piece.textContent = valor;
-        piece.draggable = true;
-        piece.ondragstart = e => {
-          e.preventDefault();
-          e.dataTransfer.setData("text/plain", e.target.textContent);
+        piece.onclick = () => {
+          if (piezaSeleccionada) piezaSeleccionada.classList.remove("selected");
+          piezaSeleccionada = piece;
+          piece.classList.add("selected");
         };
         piecesContainer.appendChild(piece);
       });
@@ -211,12 +208,16 @@
           }
         } catch {
           document.getElementById("result").textContent = "⚠️ Operación inválida.";
+          resultDiv.style.color = "orange";
         }
       }
     }
   </script>
 </body>
 </html>
+
+
+
 
 
 
