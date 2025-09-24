@@ -5,6 +5,7 @@ window.onload = function () {
   let score = 0;
   let direction = "RIGHT";
   let gameOver = false;
+  const maxScore = 6;
 
   let snake = [{ x: 5 * box, y: 5 * box }];
   let operations = [];
@@ -15,8 +16,8 @@ window.onload = function () {
     const correct = Math.random() < 0.5;
     const result = correct ? a + b : a + b + Math.floor(Math.random() * 3 + 1);
     const text = `${a} + ${b} = ${result}`;
-    const x = Math.floor(Math.random() * 18) * box;
-    const y = Math.floor(Math.random() * 18) * box;
+    const x = Math.floor(Math.random() * 12) * box;
+    const y = Math.floor(Math.random() * 12) * box;
     operations.push({ x, y, text, correct });
   }
 
@@ -29,14 +30,14 @@ window.onload = function () {
     else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
   });
 
-  function mostrarFin() {
+  function mostrarFin(mensaje) {
     gameOver = true;
     ctx.fillStyle = "rgba(0,0,0,0.7)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#fff";
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("¡Juego terminado!", canvas.width / 2, canvas.height / 2 - 20);
+    ctx.fillText(mensaje, canvas.width / 2, canvas.height / 2 - 20);
     ctx.fillText("Puntaje: " + score, canvas.width / 2, canvas.height / 2 + 10);
 
     const btnReiniciar = document.createElement("button");
@@ -86,7 +87,7 @@ window.onload = function () {
 
     // Colisión con borde
     if (headX < 0 || headY < 0 || headX >= canvas.width || headY >= canvas.height) {
-      mostrarFin();
+      mostrarFin("¡Perdiste! La serpiente chocó.");
       return;
     }
 
@@ -104,8 +105,12 @@ window.onload = function () {
           document.getElementById("score").textContent = "Puntaje: " + score;
           operations.splice(i, 1);
           generateOperation();
+          if (score >= maxScore) {
+            mostrarFin("🎉 ¡Has ganado!");
+            return;
+          }
         } else {
-          mostrarFin();
+          mostrarFin("❌ ¡Incorrecto! Era una operación falsa.");
           return;
         }
       }
@@ -116,8 +121,9 @@ window.onload = function () {
     snake.pop();
   }
 
-  setInterval(draw, 200); // velocidad reducida
+  setInterval(draw, 200);
 };
+
 
 
 

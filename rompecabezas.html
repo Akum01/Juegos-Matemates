@@ -7,123 +7,215 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
+      background-color: #fce4ec;
+      text-align: center;
+      margin: 0;
       padding: 20px;
-    }
-    #puzzle-container {
-      max-width: 700px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .equation {
-      font-size: 1.2em;
+      color: #880e4f;
       margin-bottom: 10px;
-      text-align: center;
     }
-    .slots {
+    .niveles {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
       flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
     }
-    .slot {
+    .niveles button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .niveles button:hover {
+      background-color: #fb8c00;
+    }
+    #instruccion {
+      font-size: 1.1em;
+      color: #880e4f;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    #objetivo {
+      font-size: 1.1em;
+      color: #4CAF50;
+      margin-bottom: 15px;
+    }
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px auto;
+      max-width: 320px;
+    }
+    .slot, .piece {
       width: 60px;
       height: 40px;
-      border: 2px dashed #aaa;
-      text-align: center;
-      line-height: 40px;
       font-size: 1.2em;
-      background-color: #f9f9f9;
-    }
-    .pieces {
+      border: 2px dashed #880e4f;
+      border-radius: 5px;
+      background-color: #fff;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
+      touch-action: manipulation;
     }
     .piece {
-      width: 60px;
-      height: 40px;
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      line-height: 40px;
-      font-size: 1.2em;
-      border-radius: 4px;
+      border: 2px solid #4CAF50;
+      background-color: #c8e6c9;
       cursor: grab;
     }
     #result {
-      text-align: center;
       font-size: 1.2em;
-      margin-top: 20px;
+      margin-top: 10px;
     }
-    #volver {
-      display: block;
-      margin: 20px auto 0;
+    .botones {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .botones button {
       padding: 10px 20px;
       font-size: 1em;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
       background-color: #008CBA;
       color: white;
-    }
-    #volver:hover {
-      background-color: #007bb5;
-    }
-    #level-selector {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    #level-selector button {
-      margin: 5px;
-      padding: 8px 16px;
-      font-size: 1em;
       border: none;
-      border-radius: 4px;
-      background-color: #ff9800;
-      color: white;
+      border-radius: 5px;
       cursor: pointer;
     }
-    #level-selector button:hover {
-      background-color: #e68900;
+    .botones button:hover {
+      background-color: #007bb5;
     }
   </style>
 </head>
 <body>
-
-<div id="puzzle-container">
   <h2>Rompecabezas Matemáticos</h2>
-  <div id="level-selector">
-    <button onclick="cargarNivel(1)">Nivel 1</button>
-    <button onclick="cargarNivel(2)">Nivel 2</button>
-    <button onclick="cargarNivel(3)">Nivel 3</button>
-    <button onclick="cargarNivel(4)">Nivel 4</button>
+  <p>Selecciona un nivel para comenzar</p>
+  <div class="niveles">
+    <button onclick="iniciarNivel(1)">Nivel 1</button>
+    <button onclick="iniciarNivel(2)">Nivel 2</button>
+    <button onclick="iniciarNivel(3)">Nivel 3</button>
+    <button onclick="iniciarNivel(4)">Nivel 4</button>
   </div>
-  <div class="equation" id="equation-text">Selecciona un nivel para comenzar</div>
-  <div class="slots" id="slots"></div>
-  <div class="pieces" id="pieces"></div>
+
+  <div id="instruccion"></div>
+  <div id="objetivo"></div>
+  <div class="board" id="slots"></div>
+  <div class="board" id="pieces"></div>
   <div id="result"></div>
-  <button id="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
-</div>
 
-<script src="rompecabezas.js" defer></script>
+  <div class="botones">
+    <button onclick="location.reload()">🔄 Volver a niveles</button>
+    <button onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+  </div>
 
+  <script>
+    function mostrarInstruccion(nivel) {
+      const texto = document.getElementById("instruccion");
+      if (nivel === 1) {
+        texto.textContent = "🧩 Arrastra los elementos para formar una suma básica.";
+      } else if (nivel === 2) {
+        texto.textContent = "🧩 Completa: ___ + ___ + ___ + ___ = ?";
+      } else if (nivel === 3) {
+        texto.textContent = "🧩 Forma una operación con división.";
+      } else if (nivel === 4) {
+        texto.textContent = "🧩 Usa multiplicación y suma para llegar al resultado.";
+      }
+    }
+
+    function iniciarNivel(nivel) {
+      const slotsContainer = document.getElementById("slots");
+      const piecesContainer = document.getElementById("pieces");
+      const resultDiv = document.getElementById("result");
+
+      slotsContainer.innerHTML = "";
+      piecesContainer.innerHTML = "";
+      resultDiv.textContent = "";
+      document.getElementById("objetivo").textContent = "";
+
+      mostrarInstruccion(nivel);
+
+      let expresion = [];
+      let objetivo = null;
+
+      if (nivel === 1) {
+        expresion = [2, "+", 3];
+        objetivo = 5;
+      } else if (nivel === 2) {
+        expresion = [4, "+", 5, "+", 6, "+", 5];
+        objetivo = 20;
+      } else if (nivel === 3) {
+        expresion = [8, "/", 2];
+        objetivo = 4;
+      } else if (nivel === 4) {
+        expresion = [3, "*", 3, "+", 1];
+        objetivo = 10;
+      }
+
+      document.getElementById("objetivo").textContent = `🎯 Resultado esperado: ${objetivo}`;
+
+      const desordenado = [...expresion].sort(() => Math.random() - 0.5);
+
+      expresion.forEach(() => {
+        const slot = document.createElement("div");
+        slot.className = "slot";
+        slot.ondragover = e => e.preventDefault();
+        slot.ondrop = e => {
+          const data = e.dataTransfer.getData("text");
+          if (slot.textContent === "") {
+            slot.textContent = data;
+            verificar(expresion, objetivo);
+          }
+        };
+        slotsContainer.appendChild(slot);
+      });
+
+      desordenado.forEach(valor => {
+        const piece = document.createElement("div");
+        piece.className = "piece";
+        piece.textContent = valor;
+        piece.draggable = true;
+        piece.ondragstart = e => {
+          e.dataTransfer.setData("text", e.target.textContent);
+        };
+        piecesContainer.appendChild(piece);
+      });
+    }
+
+    function verificar(expresion, objetivo) {
+      const slots = document.querySelectorAll(".slot");
+      const valores = Array.from(slots).map(s => s.textContent);
+      if (valores.every(v => v !== "")) {
+        const operacion = valores.join(" ");
+        try {
+          const resultado = eval(operacion);
+          const resultDiv = document.getElementById("result");
+          if (resultado === objetivo) {
+            resultDiv.textContent = `✅ ¡Correcto! ${operacion} = ${objetivo}`;
+            resultDiv.style.color = "green";
+          } else {
+            resultDiv.textContent = `❌ Intenta otra vez. ${operacion} = ${resultado}`;
+            resultDiv.style.color = "red";
+          }
+        } catch {
+          document.getElementById("result").textContent = "⚠️ Operación inválida.";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
+
+
+
 
 
 
